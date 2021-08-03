@@ -5,6 +5,8 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		System.out.println("Have fun!");
 		// HEllo
+		
+		// Test
 	}
 
 }
