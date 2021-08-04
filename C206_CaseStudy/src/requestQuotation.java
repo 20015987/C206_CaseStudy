@@ -12,10 +12,11 @@ public class requestQuotation {
 	private int numOfToilets;
 	private int numOfRooms;
 	private String requestStatus;
+	private String requestID;
 	
 	public requestQuotation(String propertyType, double areaSize, String requestName, int contactNumber, String email,
 			double budget, String targetDate, String renovationType, int numOfToilets, int numOfRooms,
-			String requestStatus) {
+			String requestStatus, String requestID) {
 		this.propertyType = propertyType;
 		this.areaSize = areaSize;
 		this.requestName = requestName;
@@ -27,6 +28,7 @@ public class requestQuotation {
 		this.numOfToilets = numOfToilets;
 		this.numOfRooms = numOfRooms;
 		this.requestStatus = requestStatus;
+		this.requestID = requestID;
 	}
 
 	public String getPropertyType() {
@@ -73,6 +75,8 @@ public class requestQuotation {
 		return requestStatus;
 	}
 	
-	
+	public String getRequestID() {
+		return requestID;
+	}
 	
 }
