@@ -39,7 +39,7 @@ public class C206_CaseStudy {
 				case 1:
 					int manageRFQOption = 0;
 					
-					while (customerOption != 4) {
+					while (manageRFQOption != 4) {
 						
 						// Show Manage Request For Quotation Menu
 						showManageRFQMenu();
@@ -229,6 +229,10 @@ public class C206_CaseStudy {
 	
 	public static void addUser() {
 		
+		
+	}
+	
+	public static requestQuotation addReqForQuote() {
 		
 	}
 	
