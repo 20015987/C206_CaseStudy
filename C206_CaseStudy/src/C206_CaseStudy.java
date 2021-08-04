@@ -94,10 +94,36 @@ public class C206_CaseStudy {
 				
 				// Switch case
 				
+				
 				switch(adminOption) {
 				case 1:
 					// Manage Customer
+					// Switch Case
+										
+					int manageCustomerOption = 0;
+					while (manageCustomerOption !=4) {
+						showManageCustomerMenu();
+						manageCustomerOption = Helper.readInt("Enter the option");
+					switch(manageCustomerOption) {
+					
+					
+					case 1:
+						// Add 
+						break;
+					case 2:
+						// View 
+						break;
+					case 3:
+						// Delete 
+						break;
+					case 4:
+						// Exit
+						break;
+					default:
+						System.out.println("Invalid Option");
 					break;
+					}
+					}
 				case 2:
 					// Manage Package
 					break;
@@ -123,17 +149,17 @@ public class C206_CaseStudy {
 		System.out.println("Thank you for using Renovation Ace");
 	}
 	
-	public static void showAdminMenu() {
+	public static void showManageCustomerMenu() {
 		
 		// Write Menu + Options
 		
 		Helper.line(60, "=");
-		System.out.println("WELCOME TO RENOVATION ACE");
+		System.out.println("Manage Customers");
 		Helper.line(60, "=");
 		
-		System.out.println("1. Add\n"
-						 + "2. View\n"
-						 + "3. Delete");
+		System.out.println("1. Add User\n"
+						 + "2. View User\n"
+						 + "3. Delete by Name");
 	}
 	
 	public static void showCustomerMenu() {
@@ -199,6 +225,11 @@ public class C206_CaseStudy {
 		}
 		System.out.println("Username or Password is incorrect");
 		return null;
+	}
+	
+	public static void addUser() {
+		
+		
 	}
 	
 }
