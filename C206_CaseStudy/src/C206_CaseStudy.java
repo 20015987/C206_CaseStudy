@@ -52,6 +52,7 @@ public class C206_CaseStudy {
 						switch(manageRFQOption) {
 						case 1:
 							// Add RQF
+							addReqForQuote(requestQuotationList);
 							break;
 						case 2:
 							// View RQF
@@ -232,8 +233,26 @@ public class C206_CaseStudy {
 		
 	}
 	
-	public static requestQuotation addReqForQuote() {
+	public static void addReqForQuote(ArrayList<requestQuotation> requestQuotationList) {
 		
+		String propertyType = Helper.readString("Enter Property Type: ");
+		double areaSize = Helper.readDouble("Enter Area Size: ");
+		String requestName = Helper.readString("Enter Request Name: ");
+		int contactNumber = Helper.readInt("Enter Contact Number: ");
+		String email = Helper.readString("Enter Email: ");
+		double budget = Helper.readDouble("Enter Budget: ");
+		String targetDate = Helper.readString("Enter Target Date: ");
+		String renovationType = Helper.readString("Enter Renovation Type: ");
+		int numOfToilets = Helper.readInt("Enter Number Of Toilets: ");
+		int numOfRooms = Helper.readInt("Enter Number Of Rooms: ");
+		String requestStatus = Helper.readString("Enter Request Status: ");
+		String requestID = Helper.readString("Enter Request ID: ");
+		
+		requestQuotationList.add(new requestQuotation(propertyType, areaSize, requestName, contactNumber, email,
+				budget, targetDate, renovationType, numOfToilets, numOfRooms,
+				requestStatus, requestID));
+		
+		System.out.println(requestQuotationList.get(0).getRequestName());
 	}
 	
 }
