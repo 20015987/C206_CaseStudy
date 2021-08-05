@@ -13,6 +13,8 @@ public class C206_CaseStudy {
 		
 		Account account1 = new Account("Ammar", "Customer", "ammar@jimmy.com", "Republ!c01", "new");
 		accountList.add(account1);
+		Account admin_account = new Account("Sai", "Administrator", "Sai@yahoo.com", "abcdefg", "Confirmed");
+		accountList.add(admin_account);
 		
 		requestQuotation rq1 = new requestQuotation("Property Type", 12, "Test Request Name", 92961140, "student@rp.edu.sg",
 				10, "2021", "Reno Type", 0, 0,
@@ -149,16 +151,19 @@ public class C206_CaseStudy {
 							int manageCustomerOption = 0;
 							while (manageCustomerOption !=4) {
 								showManageCustomerMenu();
-								manageCustomerOption = Helper.readInt("Enter the option");
+								manageCustomerOption = Helper.readInt("Enter the option : ");
 							switch(manageCustomerOption) {
 								case 1:
 									// Add 
+									accountList.add(addUser());
 									break;
 								case 2:
 									// View 
+									System.out.println(viewUser());
 									break;
 								case 3:
 									// Delete 
+									deleteUser();
 									break;
 								case 4:
 									// Exit
@@ -346,19 +351,75 @@ public class C206_CaseStudy {
 	}
 	
 	public static Account addUser() {
-		return currentLoginAccount;
+
+		String name = Helper.readString("Enter your name : ");
+		String role = Helper.readString("Enter the role : ");
+		String email = Helper.readString("Enter the email : ");
+		String password = Helper.readString("Enter the password : ");
+		String status = Helper.readString("Enter the status : ");		
 		
+		Account newAccount = new Account(name,role,email,password,status);
+		
+		System.out.println("Account successfully added!");
+
+		return newAccount;
 		
 	}
 	
-	public static Account deleteUser() {
-		return currentLoginAccount;
+	public static String viewUser() {
+		
+		String output = String.format("%-10s %-11s %-25s %-25s %-10s\n","NAME","ROLE","E-MAIL","PASSWORD","STATUS");
+		
+		for (Account User : accountList ) {
+			if (User.getRole().equals("Customer")) {
+				output += String.format("%-10s %-11s %-25s %-25s %-10s\n", User.getName(), User.getRole(), User.getEmail(), User.getPassword(), User.getStatus());
+			}
+			
+		}
+		//System.out.println(output);
+		
+		return output;
 		
 	}
 	
-	public static Account viewUser() {
-		return currentLoginAccount;
+public static boolean dodeleteUser(String delOption, ArrayList<Account> accountList ) {
+		
+		boolean isFound = false;
+		
+		for (int i = 0; i < accountList.size(); i++) {
+			
+			String Name = accountList.get(i).getName();
+			if(delOption.equalsIgnoreCase(Name)) {
+				accountList.remove(i);
+				isFound = true;
+			}
+			
+		}
+
+		return isFound;
 		
 	}
+	
+	public static void deleteUser() {
+		
+		 //viewAccount(accountList);
+   	 String delOption = Helper.readString("Enter the name to delete : ");
+   	 Boolean isFound = dodeleteUser(delOption,accountList);
+   	 
+   	 if (isFound == false) {
+   		 System.out.println("Name does not exist!");
+   	 }
+   	 
+   	 else {
+   		 System.out.println("Name : " + delOption + " has been deleted!");
+   	 }
+   	 
+	
+	}
+
+//	private static void viewAccount(ArrayList<Account> accountList2) {
+//		
+//		
+//	}
 	
 }
