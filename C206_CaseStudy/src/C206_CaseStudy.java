@@ -228,10 +228,6 @@ public class C206_CaseStudy {
 		return null;
 	}
 	
-	public static void addUser() {
-		
-		
-	}
 	
 	public static void addReqForQuote(ArrayList<requestQuotation> requestQuotationList) {
 		
@@ -253,6 +249,22 @@ public class C206_CaseStudy {
 				requestStatus, requestID));
 		
 		System.out.println(requestQuotationList.get(0).getRequestName());
+	}
+	
+	public static Account addUser() {
+		return currentLoginAccount;
+		
+		
+	}
+	
+	public static Account deleteUser() {
+		return currentLoginAccount;
+		
+	}
+	
+	public static Account viewUser() {
+		return currentLoginAccount;
+		
 	}
 	
 }

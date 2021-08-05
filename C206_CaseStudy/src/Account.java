@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Account {
 	
@@ -6,6 +7,8 @@ public class Account {
 	public String email;
 	public String password;
 	public String status;
+	
+	public ArrayList<requestQuotation> RQlist = new ArrayList<requestQuotation>();
 	public Account(String name, String role, String email, String password, String status) {
 
 		this.name = name;

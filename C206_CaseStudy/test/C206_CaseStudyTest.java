@@ -8,14 +8,26 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 	
-	ArrayList<Account> accountList;
+	static ArrayList<Account> accountList;
 	ArrayList<requestQuotation> requestQuotationList;
+	
+	static Account user1;
+	static Account user2;
+	static Account user3;
+	static Account user4;
+	static Account user5;
 	requestQuotation rq1;
 	requestQuotation rq2;
 
 	@Before
 	public void setUp() throws Exception {
 		// Instantiate Test Data Here
+		
+		user1 = new Account("proApple", "Customer","gamer@yahoo.com","Republ!c01","New");
+		user2 = new Account("", "Customer","Rapper@yahoo.com","Republ!c01","New");
+		user3 = new Account("Doctor", "Customer","Doctor@yahoo.com","Republ!c01","New");
+		user4 = new Account("Player69", "Customer","Player69@yahoo.com","Republ!c01","New");
+		user5 = new Account("Dogman", "Customer","Dogman@yahoo.com","Republ!c01","New");
 		
 		accountList = new ArrayList<Account>();
 		requestQuotationList = new ArrayList<requestQuotation>();
@@ -48,6 +60,79 @@ public class C206_CaseStudyTest {
 		requestQuotationList.add(rq2);
 		assertEquals("Test that the list contains 2 elements after adding again", 2, requestQuotationList.size());
 		
+	}
+	
+    public void testAddUser() {
+		
+		// Test if the list is not null
+		assertNotNull("Test that the list is not null", accountList);
+		
+		// Test if list is empty, after adding new customer the list is no longer empty 
+		accountList.add(C206_CaseStudy.addUser());
+		assertEquals("Test that the list is empty after adding new customer", 1 , accountList.size());
+			
+		// Test if the list contains one element after adding a null element
+		accountList.clear();
+		accountList.add(null);
+		assertEquals("Test that the Empty list remains empty after adding a null component", 1 , accountList.size());
+		
+		// Test if the list having one customer. And after adding it to the list, the list will have two customers 
+		accountList.add(C206_CaseStudy.addUser());
+		assertEquals("Test that the the list has 2 customers now from previous value of 1", 2 , accountList.size());
+	}
+		
+	public static void testDeleteUser() {
+
+		// Test if the list is not null
+		assertNotNull("Test that the list is not null", accountList);
+		
+		// Test if, list has one customer, check that the customer to delete by name matches the customer in the list  
+		accountList.clear();
+		accountList.add(user1);
+		if (user1.getName().equals("proApple")) {
+		accountList.remove(0);	
+		}
+		assertEquals("Test that the list becomes empty after deleting cutomer once matched from list", 0 , accountList.size());
+		
+		// Test if, the list has one customer and after removing the customer from the customer list, it will no longer have any customers remaining 
+		accountList.clear();
+		accountList.add(user1);
+		accountList.remove(0);	
+		assertEquals("Test that the list becomes empty after deleting cutomer once matched from list", 0 , accountList.size());
+		
+		// Test if, the name parameter when deleting is empty 
+		accountList.clear();
+		accountList.add(user2);
+		accountList.remove(0);	
+		assertEquals("Test that the list is empty despite having no name as a parameter ", 0 , accountList.size());
+		
+	}
+	
+	public static void testViewUser() {
+		
+		// Test if the list is not null
+		assertNotNull("Test that the list is not null", accountList);
+		
+		// Test if, when list has one customer. After viewing, only one customer is displayed 
+		accountList.clear();
+		accountList.add(user1);
+		C206_CaseStudy.viewUser();
+		assertEquals("Test that the list contains only one customer when opted to view ", 1 , accountList.size());
+		
+		// Test if, when list has zero customers. After viewing there is no customer that’s displayed 
+		accountList.clear();
+		C206_CaseStudy.viewUser();
+		assertEquals("Test that the list contains only one customer when opted to view ", 0 , accountList.size());
+		
+		// Test if, Customer list has four customers. After viewing, only four customers are displayed 
+		accountList.clear();
+		accountList.add(user1);
+		accountList.add(user3);
+		accountList.add(user4);
+		accountList.add(user5);
+		C206_CaseStudy.viewUser();
+		assertEquals("Test that the list contains four customers when opted to view ", 4 , accountList.size());
+
 	}
 
 }
