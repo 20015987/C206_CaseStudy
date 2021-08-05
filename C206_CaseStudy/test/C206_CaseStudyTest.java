@@ -156,7 +156,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.viewUser();
 		assertEquals("Test that the list contains only one customer when opted to view ", 1 , accountList.size());
 		
-		// Test if, when list has zero customers. After viewing there is no customer that’s displayed 
+		// Test if, when list has zero customers. After viewing there is no customer that is displayed 
 		accountList.clear();
 		C206_CaseStudy.viewUser();
 		assertEquals("Test that the list contains only one customer when opted to view ", 0 , accountList.size());
