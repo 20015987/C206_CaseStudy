@@ -62,6 +62,43 @@ public class C206_CaseStudyTest {
 		
 	}
 	
+	@Test
+	public void testViewReqForQuote() {
+		// Test that one RFQ is displayed when list has 1 element
+		user1.RQlist.add(rq1);
+		assertEquals("Test that one RFQ is displayed when list has 1 element.","ID    Request Name         Type       Target Date        Status    \n"
+				+ "RQ01  Test Request Name    Reno Type  2021               Status    \n",
+				C206_CaseStudy.viewReqForQuote(user1));
+		// Test that no RFQ is displayed when list has 0 element
+		user1.RQlist.clear();
+		assertEquals("Test that no RFQ is displayed when list has 0 element", 
+				String.format("%-5s %-20s %-10s %-18s %-10s\n", 
+				"ID", "Request Name", "Type", "Target Date", "Status"), C206_CaseStudy.viewReqForQuote(user1));
+		// Test that two RQF is displayed when list has 2 element
+		user1.RQlist.add(rq1);
+		user1.RQlist.add(rq2);
+		assertEquals("Test that two RQF is displayed when list has 2 element", "ID    Request Name         Type       Target Date        Status    \n"
+				+ "RQ01  Test Request Name    Reno Type  2021               Status    \n"
+				+ "RQ01  Test Request Name    Reno Type  2021               Status    \n", C206_CaseStudy.viewReqForQuote(user1));
+		// Test that the list is not null
+		assertNotNull("Test that the list is not null", user1.RQlist);
+	}
+	
+	@Test
+	public void testDeleteReqForQuote() {
+		// Test that the list is not null
+		assertNotNull("Test that the list is not null", user1.RQlist);
+		// Test that the Request Quote Name is not empty
+		user1.RQlist.add(rq1);
+		assertEquals("RQN not empty", "Test Request Name", user1.RQlist.get(0).getRequestName());
+		// Test that list has 0 elements after removing 1 element 
+		user1.RQlist.remove(0);
+		assertEquals("Test that the list has 0 element after removing 1 element", 0, user1.RQlist.size());
+		// Test check that the request name match the deleted request
+		user1.RQlist.add(rq1);
+		assertEquals("Test that the RQN match the deleted request", "Test Request Name", user1.RQlist.get(0).getRequestName());
+	}
+	@Test
     public void testAddUser() {
 		
 		// Test if the list is not null
@@ -80,8 +117,8 @@ public class C206_CaseStudyTest {
 		accountList.add(C206_CaseStudy.addUser());
 		assertEquals("Test that the the list has 2 customers now from previous value of 1", 2 , accountList.size());
 	}
-		
-	public static void testDeleteUser() {
+	@Test
+	public void testDeleteUser() {
 
 		// Test if the list is not null
 		assertNotNull("Test that the list is not null", accountList);
@@ -107,8 +144,8 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the list is empty despite having no name as a parameter ", 0 , accountList.size());
 		
 	}
-	
-	public static void testViewUser() {
+	@Test
+	public void testViewUser() {
 		
 		// Test if the list is not null
 		assertNotNull("Test that the list is not null", accountList);

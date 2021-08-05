@@ -5,7 +5,6 @@ public class C206_CaseStudy {
 	// Instantiate ArrayLists
 	
 	private static ArrayList<Account> accountList = new ArrayList<Account>();
-	private static ArrayList<requestQuotation> requestQuotationList = new ArrayList<requestQuotation>();
 	private static Account currentLoginAccount = null;
 	
 	public static void main(String[] args) {
@@ -15,139 +14,182 @@ public class C206_CaseStudy {
 		Account account1 = new Account("Ammar", "Customer", "ammar@jimmy.com", "Republ!c01", "new");
 		accountList.add(account1);
 		
-		// Login Account
+		requestQuotation rq1 = new requestQuotation("Property Type", 12, "Test Request Name", 92961140, "student@rp.edu.sg",
+				10, "2021", "Reno Type", 0, 0,
+				"Status", "RQ01");
+		requestQuotation rq2 = new requestQuotation("Property Type", 12, "Test Request Name", 92961140, "student@rp.edu.sg",
+				10, "2021", "Reno Type", 0, 0,
+				"Status", "RQ01");
 		
-		while (currentLoginAccount == null) {
-			currentLoginAccount = loginAccount();
-		}
+		account1.RQlist.add(rq1);
+		account1.RQlist.add(rq2);
 		
-		// Check Role Of Account
+		int visitorOption = 0;
 		
-		if (currentLoginAccount.getRole().equals("Customer")) {
+		while (visitorOption != 3) {
+			// Show Visitor Page
+			showVisitorMenu();
+			// Prompt Option
+			Helper.line(60, "-");
+			visitorOption = Helper.readInt("Enter Option: ");
+			Helper.line(60, "-");
 			
-			int customerOption = 0;
+			if (visitorOption == 1) {
+				currentLoginAccount = loginAccount();
+			}
+			else if (visitorOption == 2) {
+				// Call The Register Method Here
+			}
+			else if (visitorOption == 3) {
+				// Goodbye message
+				System.out.println("Thank you for using Renovation Ace");
+			}
+			else {
+				System.out.println("Invalid Option");
+			}
 			
-			while (customerOption != 3) {
+			while (currentLoginAccount != null) {
 				
-				// Show Menu
-				showCustomerMenu();
+				// Check Role Of Account
 				
-				// Prompt Customer
-				customerOption = Helper.readInt("Option: ");
-				
-				switch(customerOption) {
-				case 1:
-					int manageRFQOption = 0;
+				if (currentLoginAccount.getRole().equals("Customer")) {
 					
-					while (manageRFQOption != 4) {
+					int customerOption = 0;
+					
+					while (customerOption != 3) {
 						
-						// Show Manage Request For Quotation Menu
-						showManageRFQMenu();
+						// Show Menu
+						showCustomerMenu();
 						
 						// Prompt Customer
-						manageRFQOption = Helper.readInt("Option: ");
+						Helper.line(60, "-");
+						customerOption = Helper.readInt("Option: ");
+						Helper.line(60, "-");
 						
-						// Switch Case
-						
-						switch(manageRFQOption) {
+						switch(customerOption) {
 						case 1:
-							// Add RQF
-							addReqForQuote(requestQuotationList);
-							break;
+							int manageRFQOption = 0;
+							
+							while (manageRFQOption != 4) {
+								
+								// Show Manage Request For Quotation Menu
+								showManageRFQMenu();
+								
+								// Prompt Customer
+								Helper.line(60, "-");
+								manageRFQOption = Helper.readInt("Option: ");
+								Helper.line(60, "-");
+								
+								// Switch Case
+								
+								switch(manageRFQOption) {
+								case 1:
+									// Add RQF
+									addReqForQuote(currentLoginAccount.RQlist);
+									break;
+								case 2:
+									// View RQF
+									if (currentLoginAccount.RQlist.size() != 0) {
+										System.out.println(viewReqForQuote(currentLoginAccount));
+									}
+									else {
+										System.out.println("No Existing Request For Quotations");
+									}
+									break;
+								case 3:
+									// Delete RFQ
+									if (currentLoginAccount.RQlist.size() != 0) {
+										deleteReqForQuote(currentLoginAccount);
+									}
+									else {
+										System.out.println("No Existing Request For Quotations (Feature Unavailable)");
+									}
+									break;
+								case 4:
+									// Exit
+									break;
+								default:
+									System.out.println("Invalid Option");
+								}
+							}
+							
 						case 2:
-							// View RQF
+							// Manage Appointments
 							break;
 						case 3:
-							// Delete RFQ
+							// Log out
+							currentLoginAccount = null;
+							System.out.println("Log out successful");
+							break;
+						default:
+							Helper.line(60, "-");
+							System.out.println("Invalid Option");
+						}
+					}
+				}
+				else if (currentLoginAccount.getRole().equals("Administrator")) {
+					
+					int adminOption = 0;
+					
+					// While loop
+					while (adminOption != 6) {
+						
+						// Show Menu
+						showAdministratorMenu();
+						// Prompt Customer
+						adminOption = Helper.readInt("Option: ");
+						// Switch case
+						
+						
+						switch(adminOption) {
+						case 1:
+							// Manage Customer
+							// Switch Case
+												
+							int manageCustomerOption = 0;
+							while (manageCustomerOption !=4) {
+								showManageCustomerMenu();
+								manageCustomerOption = Helper.readInt("Enter the option");
+							switch(manageCustomerOption) {
+								case 1:
+									// Add 
+									break;
+								case 2:
+									// View 
+									break;
+								case 3:
+									// Delete 
+									break;
+								case 4:
+									// Exit
+									break;
+								default:
+									System.out.println("Invalid Option");
+								break;
+								}
+							}
+						case 2:
+							// Manage Package
+							break;
+						case 3:
+							// Manage Request For Quotation
 							break;
 						case 4:
-							// Exit
+							// Manage Quotation
+							break;
+						case 5:
+							// Manage Appointments
+							break;
+						case 6:
+							// Log out
 							break;
 						default:
 							System.out.println("Invalid Option");
 						}
 					}
-					
-				case 2:
-					// Manage Appointments
-					break;
-				case 3:
-					// Log out
-					break;
-				default:
-					System.out.println("Invalid Option");
 				}
 			}
 		}
-		else if (currentLoginAccount.getRole().equals("Administrator")) {
-			
-			int adminOption = 0;
-			
-			// While loop
-			while (adminOption != 6) {
-				
-				// Show Menu
-				showAdministratorMenu();
-				
-				// Prompt Customer
-				
-				adminOption = Helper.readInt("Option: ");
-				
-				// Switch case
-				
-				
-				switch(adminOption) {
-				case 1:
-					// Manage Customer
-					// Switch Case
-										
-					int manageCustomerOption = 0;
-					while (manageCustomerOption !=4) {
-						showManageCustomerMenu();
-						manageCustomerOption = Helper.readInt("Enter the option");
-					switch(manageCustomerOption) {
-					
-					
-					case 1:
-						// Add 
-						break;
-					case 2:
-						// View 
-						break;
-					case 3:
-						// Delete 
-						break;
-					case 4:
-						// Exit
-						break;
-					default:
-						System.out.println("Invalid Option");
-					break;
-					}
-					}
-				case 2:
-					// Manage Package
-					break;
-				case 3:
-					// Manage Request For Quotation
-					break;
-				case 4:
-					// Manage Quotation
-					break;
-				case 5:
-					// Manage Appointments
-					break;
-				case 6:
-					// Log out
-					break;
-				default:
-					System.out.println("Invalid Option");
-				}
-			}
-		}
-		
-		// Goodbye message
-		System.out.println("Thank you for using Renovation Ace");
 	}
 	
 	public static void showManageCustomerMenu() {
@@ -168,7 +210,7 @@ public class C206_CaseStudy {
 		// Write Menu + Options
 		
 		Helper.line(60, "=");
-		System.out.println("WELCOME TO RENOVATION ACE");
+		System.out.println("WELCOME TO RENOVATION ACE (CUSTOMER)");
 		Helper.line(60, "=");
 		
 		System.out.println("1. Manage Request For Quotation\n"
@@ -181,7 +223,7 @@ public class C206_CaseStudy {
 		// Write Menu + Options
 		
 		Helper.line(60, "=");
-		System.out.println("WELCOME TO RENOVATION ACE");
+		System.out.println("WELCOME TO RENOVATION ACE (ADMINISTRATOR)");
 		Helper.line(60, "=");
 		
 		System.out.println("1. Manage Customer\n"
@@ -190,6 +232,19 @@ public class C206_CaseStudy {
 						 + "4. Manage Quotation\n"
 						 + "5. Manage Appointment\n"
 						 + "6. Log out");
+	}
+	
+	public static void showVisitorMenu() {
+		
+		// Write Menu + Options
+		
+		Helper.line(60, "=");
+		System.out.println("WELCOME TO RENOVATION ACE");
+		Helper.line(60, "=");
+		
+		System.out.println("1. Login Account\n"
+						 + "2. Register Account\n"
+						 + "3. Exit Renovation Ace");
 	}
 	
 	// Add your methods here
@@ -202,7 +257,7 @@ public class C206_CaseStudy {
 		System.out.println("1. Add Request For Quotation\n"
 						 + "2. View Request For Quotation\n"
 						 + "3. Delete Request For Quotation\n"
-						 + "4. Exit");
+						 + "4. Return To Homepage");
 		
 		
 	}
@@ -210,7 +265,7 @@ public class C206_CaseStudy {
 	public static Account loginAccount() {
 		
 		Helper.line(60, "=");
-		System.out.println("WELCOME TO RENOVATION ACE");
+		System.out.println("LOGIN PAGE");
 		Helper.line(60, "=");
 		
 		// Prompt User For Username and Password
@@ -241,14 +296,53 @@ public class C206_CaseStudy {
 		String renovationType = Helper.readString("Enter Renovation Type: ");
 		int numOfToilets = Helper.readInt("Enter Number Of Toilets: ");
 		int numOfRooms = Helper.readInt("Enter Number Of Rooms: ");
-		String requestStatus = Helper.readString("Enter Request Status: ");
-		String requestID = Helper.readString("Enter Request ID: ");
+		String requestStatus = Helper.readString("Enter Request Status (Urgent/Not Urgent): ");
+		
+		String requestID = Integer.toString(requestQuotationList.size() + 1);
 		
 		requestQuotationList.add(new requestQuotation(propertyType, areaSize, requestName, contactNumber, email,
 				budget, targetDate, renovationType, numOfToilets, numOfRooms,
 				requestStatus, requestID));
 		
-		System.out.println(requestQuotationList.get(0).getRequestName());
+		System.out.println(requestQuotationList.get(0).getRequestName() + " has been successfully added!");
+		
+	}
+	
+	public static String viewReqForQuote(Account account) {
+		String output = String.format("%-5s %-20s %-10s %-18s %-10s\n", "ID", "Request Name", "Type", "Target Date", "Status");
+		
+		for (requestQuotation anRQObject: account.RQlist) {
+			String ID = anRQObject.getRequestID();
+			String RenovName = anRQObject.getRequestName();
+			String RenovType = anRQObject.getRenovationType();
+			String Date = anRQObject.getTargetDate();
+			String Status = anRQObject.getRequestStatus();
+			
+			output += String.format("%-5s %-20s %-10s %-18s %-10s\n", ID, RenovName, RenovType, Date, Status);
+		}
+		
+		return output;
+	}
+	
+	public static void deleteReqForQuote(Account account) {
+		
+		String searchRQN = Helper.readString("Enter Request Name To Delete: ");
+		int deleteIndex = -1;
+		for (int i = 0; i < account.RQlist.size(); i ++) {
+			if (account.RQlist.get(i).getRequestName().equals(searchRQN)) {
+				deleteIndex = i;
+				break;
+			}
+		}
+		
+		if (deleteIndex != -1) {
+			account.RQlist.remove(deleteIndex);
+			System.out.println("Successfully Deleted!");
+		}
+		else {
+			System.out.println("No Such Request Name Exists");
+		}
+		
 	}
 	
 	public static Account addUser() {
