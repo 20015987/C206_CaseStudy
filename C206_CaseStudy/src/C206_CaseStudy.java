@@ -64,7 +64,7 @@ public class C206_CaseStudy {
 					
 					int customerOption = 0;
 					
-					while (customerOption != 3) {
+					while (customerOption != 4) {
 						
 						// Show Menu
 						showCustomerMenu();
@@ -124,23 +124,57 @@ public class C206_CaseStudy {
 						case 2:
 							// Manage Appointments
 							
-							// Add Appointments
-							
-							// View Appointments
-							
-							// Delete Appointments
-							
-							break;
-						case 3:
-							// Manage Quotations
 							int option = 0;
 							while (option != 4) {
-								showManageQuotationMenu();
+								showManageAppointmentMenu();
 								Helper.line(60, "-");
 								option = Helper.readInt("Option > ");
 								Helper.line(60, "-");
 
 								switch(option) {
+								case 1: 
+										
+										
+										// Add appointment
+										
+										String custName = Helper.readString("Enter Name > ");
+										String date = Helper.readString("Enter Date-Of-Appointment > ");
+										int time = Helper.readInt("Enter Time-of-Appointment > ");
+										String designerName = Helper.readString("Enter Designer Name > ");
+										String address = Helper.readString("Enter Address of premise > ");
+										
+										appointmentList.add(inputAppointment(custName, date, time, designerName, address));
+										break;
+									case 2:
+											
+										// View Appointment
+										System.out.println(viewAllAppointment(appointmentList));
+										break;
+									case 3:
+										// Delete Appointment
+										deleteAppointment();
+										break;
+									case 4:
+										// Exit Appointment Menu
+										break;
+									default:
+										System.out.println("Invalid Option!");
+										break;
+									}
+		
+								}
+							
+							break;
+						case 3:
+							// Manage Quotations
+							int optionQ = 0;
+							while (optionQ != 4) {
+								showManageQuotationMenu();
+								Helper.line(60, "-");
+								optionQ = Helper.readInt("Option > ");
+								Helper.line(60, "-");
+
+								switch(optionQ) {
 								case 1: 
 									//Add Quotation
 									Quotation a = addQuotation();
@@ -242,9 +276,17 @@ public class C206_CaseStudy {
 							}
 						case 2:
 							// Manage Package
+							
+								// Add Package
+							
+								// View Package
+							
+								// Delete Package
 							break;
 						case 3:
 							// Manage Request For Quotation
+							
+							
 							break;
 						case 4:
 							// Manage Quotation
@@ -255,6 +297,8 @@ public class C206_CaseStudy {
 							break;
 						case 6:
 							// Log out
+							currentLoginAccount = null;
+							System.out.println("Log out successful");
 							break;
 						default:
 							System.out.println("Invalid Option");
@@ -264,6 +308,18 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	
+	public static void showManageAppointmentMenu() {
+        Helper.line(60, "-");
+        System.out.println("Manage Appointment");
+        Helper.line(60, "-");
+       
+        System.out.println("1. Add Appointment\n"
+                         + "2. View All Appointment\n"
+                         + "3. Delete Appointment\n"
+                         + "4. Return To Homepage");
+       
+    }
 	
 	private static void setHeader(String string) {
 		// TODO Auto-generated method stub
@@ -559,21 +615,16 @@ public class C206_CaseStudy {
 	
 	}
 	
-	public static Appointment inputAppointment() { // code made by charmaine - 20028846
-		
-		String custName = Helper.readString("Enter Name > ");
-		String date = Helper.readString("Enter Date-Of-Appointment > ");
-		int time = Helper.readInt("Enter Time-of-Appointment > ");
-		String designerName = Helper.readString("Enter Designer Name > ");
-		String address = Helper.readString("Enter Address of premise > ");
+	public static Appointment inputAppointment(String custName, String date, int time, String designerName, String address) { // code made by charmaine - 20028846
 		
 		Appointment app = new Appointment(custName, date, time, designerName, address);
-		return app;
+        System.out.println("Appointment added successfully!");
+        return app;
 			
 	}
 		
 	public static void addAppointment(ArrayList<Appointment> appointmentList, Appointment app) { // code made by charmaine - 20028846
-			
+		
 		appointmentList.add(app);
 		System.out.println("Appointment has been added!");
 			
@@ -584,18 +635,20 @@ public class C206_CaseStudy {
 		String output = "";
 			
 		for (int i = 0; i < appointmentList.size(); i++) {
-			output += String.format("%-10s %-20s %-20s %-20s %-10s\n", appointmentList.get(i).getCustName(), appointmentList.get(i).getDate(), appointmentList.get(i).getTime(), 
+			output += String.format("%-18s %-20s %-20s %-20s %-10s\n", appointmentList.get(i).getCustName(), appointmentList.get(i).getDate(), appointmentList.get(i).getTime(), 
 					appointmentList.get(i).getDesignerName(), appointmentList.get(i).getAddress());
 		}
 		return output;
 			
 	}
 		
-	public static void viewAllAppointment(ArrayList<Appointment> appointmentList) { // code made by charmaine - 20028846
+	public static String viewAllAppointment(ArrayList<Appointment> appointmentList) { // code made by charmaine - 20028846
 		C206_CaseStudy.setHeader("APPOINTMENT LIST");
-		String output = String.format("%-10s %-20s %-20s %-20s %-10s\n", "Customer Name", "Date", "Time", "Designer's Name", "Address");
+		String output = String.format("%-18s %-20s %-20s %-20s %-10s\n", "Customer Name", "Date", "Time", "Designer's Name", "Address");
 		output += retrieveAllAppointments(appointmentList);
-		System.out.println(output);
+		// System.out.println(output);
+		
+		return output;
 			
 	}
 	
