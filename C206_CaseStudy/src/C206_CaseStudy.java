@@ -123,6 +123,13 @@ public class C206_CaseStudy {
 							
 						case 2:
 							// Manage Appointments
+							
+							// Add Appointments
+							
+							// View Appointments
+							
+							// Delete Appointments
+							
 							break;
 						case 3:
 							// Manage Quotations
@@ -157,6 +164,7 @@ public class C206_CaseStudy {
 							                if (c.getQID().equals(QID)) {
 							                    b = c;
 							                    C206_CaseStudy.deleteQuotation(ql, b);
+							                    break;
 							                }
 							            }
 							        } else {
@@ -169,6 +177,7 @@ public class C206_CaseStudy {
 								}
 
 							}
+							break;
 						case 4: 
 							// Log out
 							currentLoginAccount = null;
@@ -358,7 +367,8 @@ public class C206_CaseStudy {
 		
 		System.out.println("1. Manage Request For Quotation\n"
 						 + "2. Manage Appointment\n"
-						 + "3. Log out");
+						 + "3. Manage Quotations\n"
+						 + "4. Log out");
 	}
 	
 	public static void showAdministratorMenu() {
