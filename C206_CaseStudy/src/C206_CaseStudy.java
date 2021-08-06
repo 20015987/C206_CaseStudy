@@ -155,7 +155,14 @@ public class C206_CaseStudy {
 							switch(manageCustomerOption) {
 								case 1:
 									// Add 
-									accountList.add(addUser());
+									
+									String name = Helper.readString("Enter your name : ");
+									String role = Helper.readString("Enter the role : ");
+									String email = Helper.readString("Enter the email : ");
+									String password = Helper.readString("Enter the password : ");
+									String status = Helper.readString("Enter the status : ");
+									
+									accountList.add(addUser(name, role, email, password, status));
 									break;
 								case 2:
 									// View 
@@ -195,6 +202,11 @@ public class C206_CaseStudy {
 				}
 			}
 		}
+	}
+	
+	private static void setHeader(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public static void showManageCustomerMenu() {
@@ -350,13 +362,7 @@ public class C206_CaseStudy {
 		
 	}
 	
-	public static Account addUser() {
-
-		String name = Helper.readString("Enter your name : ");
-		String role = Helper.readString("Enter the role : ");
-		String email = Helper.readString("Enter the email : ");
-		String password = Helper.readString("Enter the password : ");
-		String status = Helper.readString("Enter the status : ");		
+	public static Account addUser(String name, String role, String email, String password, String status) {		
 		
 		Account newAccount = new Account(name,role,email,password,status);
 		
@@ -382,7 +388,7 @@ public class C206_CaseStudy {
 		
 	}
 	
-public static boolean dodeleteUser(String delOption, ArrayList<Account> accountList ) {
+	public static boolean dodeleteUser(String delOption, ArrayList<Account> accountList ) {
 		
 		boolean isFound = false;
 		
@@ -395,7 +401,7 @@ public static boolean dodeleteUser(String delOption, ArrayList<Account> accountL
 			}
 			
 		}
-
+		
 		return isFound;
 		
 	}
@@ -403,23 +409,57 @@ public static boolean dodeleteUser(String delOption, ArrayList<Account> accountL
 	public static void deleteUser() {
 		
 		 //viewAccount(accountList);
-   	 String delOption = Helper.readString("Enter the name to delete : ");
-   	 Boolean isFound = dodeleteUser(delOption,accountList);
+   	 	String delOption = Helper.readString("Enter the name to delete : ");
+   	 	Boolean isFound = dodeleteUser(delOption,accountList);
    	 
-   	 if (isFound == false) {
-   		 System.out.println("Name does not exist!");
-   	 }
+   	 	if (isFound == false) {
+   	 		System.out.println("Name does not exist!");
+   	 	}
    	 
-   	 else {
-   		 System.out.println("Name : " + delOption + " has been deleted!");
-   	 }
+   	 	else {
+   	 		System.out.println("Name : " + delOption + " has been deleted!");
+   	 	}
    	 
 	
 	}
-
-//	private static void viewAccount(ArrayList<Account> accountList2) {
-//		
-//		
-//	}
 	
+	public static Appointment inputAppointment() { // code made by charmaine - 20028846
+			
+			String date = Helper.readString("Enter Date-Of-Appointment > ");
+			int time = Helper.readInt("Enter Time-of-Appointment > ");
+			String designerName = Helper.readString("Enter Designer Name > ");
+			String address = Helper.readString("Enter Address of premise > ");
+			
+			Appointment app = new Appointment(date, time, designerName, address);
+			return app;
+			
+		}
+		
+	public static void addAppointment(ArrayList<Appointment> appointmentList, Appointment app) { // code made by charmaine - 20028846
+			
+		appointmentList.add(app);
+		System.out.println("Appointment has been added!");
+			
+	}
+		
+	public static String retrieveAllAppointments(ArrayList<Appointment> appointmentList) { // code made by charmaine - 20028846
+			
+		String output = "";
+			
+		for (int i = 0; i < appointmentList.size(); i++) {
+			output += String.format("%-20s %-10s %-20s %-10s\n", appointmentList.get(i).getDate(), appointmentList.get(i).getTime(), 
+					appointmentList.get(i).getDesignerName(), appointmentList.get(i).getAddress());
+				
+		}
+		return output;
+			
+	}
+		
+	public static void viewAllAppointment(ArrayList<Appointment> appointmentList) { // code made by charmaine - 20028846
+		C206_CaseStudy.setHeader("APPOINTMENT LIST");
+		String output = String.format("%-10s %-10s %-20s %-20s\n", "Date", "Time", "Designer's Name", "Address");
+		output += retrieveAllAppointments(appointmentList);
+		System.out.println(output);
+			
+	}		
 }

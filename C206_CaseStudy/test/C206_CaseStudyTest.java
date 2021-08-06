@@ -105,7 +105,8 @@ public class C206_CaseStudyTest {
 		assertNotNull("Test that the list is not null", accountList);
 		
 		// Test if list is empty, after adding new customer the list is no longer empty 
-		accountList.add(C206_CaseStudy.addUser());
+		
+		accountList.add(C206_CaseStudy.addUser("Sai", "Administrator", "sai@gmail.com", "abcd1234", "New"));
 		assertEquals("Test that the list is empty after adding new customer", 1 , accountList.size());
 			
 		// Test if the list contains one element after adding a null element
@@ -114,7 +115,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the Empty list remains empty after adding a null component", 1 , accountList.size());
 		
 		// Test if the list having one customer. And after adding it to the list, the list will have two customers 
-		accountList.add(C206_CaseStudy.addUser());
+		accountList.add(C206_CaseStudy.addUser("Sai", "Administrator", "sai@gmail.com", "abcd1234", "New"));
 		assertEquals("Test that the the list has 2 customers now from previous value of 1", 2 , accountList.size());
 	}
 	@Test
