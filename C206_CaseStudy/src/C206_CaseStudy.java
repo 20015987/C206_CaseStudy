@@ -410,7 +410,8 @@ public class C206_CaseStudy {
 		
 		System.out.println("1. Add User\n"
 						 + "2. View User\n"
-						 + "3. Delete by Name");
+						 + "3. Delete by Name\n"
+						 + "4. Return To Homepage");
 	}
 	
 	public static void showCustomerMenu() {
