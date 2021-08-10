@@ -59,7 +59,26 @@ public class c206 {
 		
 	}
 	
+	static String viewPackage(ArrayList<Package> PackageList) {
+		String output = String.format("%-10s %-30s %-20s %-20s %-15s\n", "CODE", "DESCRIPTION", "START-DATE", "END-DATE", "AMOUNT");
+		for(Package i : PackageList) {
+			output+= String.format("%-10s %-30s %-20s %-20s %-15d\n", i.getCode(), i.getDescription(), i.getStartDate(), i.getEndDate(), i.getAmount());
+		}
+		return output;
 		
+	}
+
+	public static void packagemenu() {
+		Helper.line(30,"-");
+		System.out.println("WELCOME TO ADMIN PACKAGE MANAGEMENT!");
+		Helper.line(30,"-");
+		System.out.println("1.Add a Package");
+		System.out.println("2.View all Packages");
+		System.out.println("3.Delete a Package");
+		System.out.println("4.Update Package");
+		System.out.println("5.Quit");
+		
+	}
 
 	
 }
