@@ -47,7 +47,8 @@ public class C206_CaseStudyTest {
 		app1 = new Appointment("Charmaine", "9 August 2021", 1300, "Michelle", "Woodlands Avenue 1");
 		app2 = new Appointment("Bob", "9 July 2021", 1900, "Mark", "Woodlands Drive 1");
 		app3 = new Appointment("Michael", "9 September 2021", 1230, "Peter", "Woodlands Avenue 2");
-
+		
+		appointmentList = new ArrayList<Appointment>();
 	}
 
 
@@ -230,7 +231,7 @@ public void testViewAllAppointment() {
 	appointmentList.add(app3);
 
 	C206_CaseStudy.viewAllAppointment(appointmentList);
-	assertEquals("Test that the list contains 3 appointments when opted to view ", 4 , appointmentList.size());
+	assertEquals("Test that the list contains 3 appointments when opted to view ", 3 , appointmentList.size());
 
 }
 @Test
@@ -243,7 +244,7 @@ public void testDeleteAppointment() {
 	appointmentList.clear();
 	appointmentList.add(app1);
 	if (app1.getCustName().equals("Charmaine")) {
-		accountList.remove(0);	
+		appointmentList.remove(0);	
 	}
 	assertEquals("Test that the list becomes empty after deleting appointment once matched from list", 0 , appointmentList.size());
 
